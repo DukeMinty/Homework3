@@ -1,4 +1,4 @@
-package edu.mu.shopMain;
+package edu.mu;
 
 public class Main {
 

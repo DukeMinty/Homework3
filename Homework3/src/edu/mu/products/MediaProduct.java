@@ -1,4 +1,4 @@
-package edu.mu.mediaProducts;
+package edu.mu.products;
 
 public class MediaProduct {
 
