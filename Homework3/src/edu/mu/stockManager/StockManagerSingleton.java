@@ -1,4 +1,4 @@
-package edu.mu.products;
+package edu.mu.stockManager;
 
 public class StockManagerSingleton {
 
