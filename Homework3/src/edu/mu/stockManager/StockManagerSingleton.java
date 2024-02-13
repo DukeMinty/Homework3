@@ -37,12 +37,18 @@ public class StockManagerSingleton {
             return false;
         }
 		catch(IllegalArgumentException e) {
-			System.out.println("Student data is incompatible");
+			System.out.println("Data is incompatible");
 			e.printStackTrace();
 			return false;
 		}
-}
-//			• public boolean updateItemPrice(MediaProduct product, double newPrice):
+	}
+		public boolean updateItemPrice(MediaProduct product, double newPrice) {
+			if(product != null && product.getPrice() != newPrice) {
+				product.setPrice(newPrice);
+				return true;
+			}
+			return false;
+		}
 //			o Updates the price of the given media product to the newPrice.
 //			o Returns true if the update is successful, false otherwise
 	
@@ -93,8 +99,8 @@ public class StockManagerSingleton {
 //			o This creates a new ArrayList of TapeRecordProduct that filters the tape records and
 //			returns the ArrayList. Beware of not leaking any informaHon.
 
-	public ArrayList<MediaProduct> getProducts() {
-		return products;
+	public ArrayList<MediaProduct> getproductList() {
+		return productList;
 	}
 
 	public String getInventoryFilePath() {
