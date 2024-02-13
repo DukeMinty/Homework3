@@ -14,6 +14,14 @@ public class MediaProduct {
 		this.genre = genre;
 		
 	}
+	
+	//copy constructor
+	public MediaProduct(MediaProduct original) {
+		this.title = original.title;
+		this.price = original.price;
+		this.year = original.year;
+		this.genre = original.genre;
+	}
 
 	public String getTitle() {
 		return title;
