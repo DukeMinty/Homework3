@@ -12,7 +12,6 @@ public class MediaProduct {
 		this.price = price;
 		this.year = year;
 		this.genre = genre;
-		
 	}
 	
 	//copy constructor

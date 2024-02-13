@@ -7,5 +7,6 @@ public enum Genre {
 	CLASSICAL,
 	HIP_HOP,
 	ELECTRONIC,
-	CHILDREN
+	CHILDREN;
+
 }
