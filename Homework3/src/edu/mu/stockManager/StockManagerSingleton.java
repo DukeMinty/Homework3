@@ -53,7 +53,23 @@ public class StockManagerSingleton {
 //			o Returns true if the update is successful, false otherwise
 	
 	
-//			• public boolean addItem(MediaProduct product):
+			public boolean addItem(MediaProduct product){
+				if (product == null) {
+			        // If product is null, do not add it to the inventory and return false.
+			        return false;
+			    }
+
+			    // Check if the product already exists in the inventory
+			    for (MediaProduct existingProduct : productList) {
+			        if (existingProduct.getTitle().equals(product.getTitle()) && existingProduct.getYear() == product.getYear()) {
+			            // Product already exists in the inventory, do not add.
+			            return false;
+			        }
+			    }
+			    // If product is new, add it to inventory
+			    productList.add(product);
+			    return true;
+			}
 //			o Adds a new media product to the inventory.
 //			o Returns true if the addiHon is successful, false otherwise.
 	
