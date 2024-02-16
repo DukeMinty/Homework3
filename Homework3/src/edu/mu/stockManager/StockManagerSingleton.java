@@ -1,8 +1,10 @@
 package edu.mu.stockManager;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -120,7 +122,40 @@ public class StockManagerSingleton {
 //			o Returns true if the removal is successful, false otherwise.
 	
 	
-//			• public boolean saveStock():
+			public boolean saveStock() {
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter(inventoryFilePath));
+					
+					// truncates the file
+					bw.flush();
+					
+					String line1 = "Type,Title,Price,Year,Genre";
+					bw.write(line1, 0, line1.length());
+					
+					// Write each product to the file
+					String type = "";
+					String className;
+					for (MediaProduct product : productList) {
+						// Formats the genre to only have the first character capitalized
+						String genre = product.getGenre().name().toLowerCase();
+						String firstChar = String.valueOf(genre.charAt(0));
+						genre = genre.replaceFirst(firstChar, firstChar.toUpperCase());
+						
+						String line = String.format("%s,%s,%f,%d,%s", 
+													product.getType(), product.getTitle(), product.getPrice(), product.getYear(), genre);
+						bw.write(line, 0, line.length());
+						bw.newLine();
+					}
+				
+					bw.close();
+				}
+				catch (IOException e){
+					System.out.println(e);
+					return false;
+				}
+				
+				return true;
+			}
 //			o Saves the updated inventory back to the CSV file located at inventoryFilePath.
 //			o Overwrites the exisHng file with the updated inventory data.
 //			o Returns true if the saving is successful, false otherwise (file does not exist, or file empty).
