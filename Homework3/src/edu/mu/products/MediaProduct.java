@@ -73,7 +73,7 @@ public class MediaProduct {
 			   this.getClass() == other.getClass();
 	}
 	
-	public boolean toString(MediaProduct mediaProduct) {
+	public static boolean toString(MediaProduct mediaProduct) {
 		if(mediaProduct==null) {
 			return false;
 		}

@@ -14,7 +14,7 @@ public class StockManagerSingleton {
 	
 	private final String inventoryFilePath = "files/inventory.csv";
 	
-	private ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
+	private ArrayList<MediaProduct> productList;
 	private static StockManagerSingleton instance = null;
 	
 	public static StockManagerSingleton getInstance() {
@@ -25,44 +25,51 @@ public class StockManagerSingleton {
 		return instance;
 	}
 	
-	private StockManagerSingleton() { }
-	
-	public boolean initializeStock(String filePath) {
-		try (BufferedReader br = new BufferedReader(new FileReader(inventoryFilePath))) {
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		        String[] values = line.split(",");
-		        String type = values[0];
-		        String title = values[1];
-                double price = Double.parseDouble(values[2]);
-                int year = Integer.parseInt(values[3]);
-                Genre genre = Genre.valueOf(values[4]);
-                if(type == "CD") {
-                	MediaProduct product = new CDRecordProduct(type,title,price,year,genre);
-                	productList.add(product);
-                }
-                if(type == "Vinyl") {
-                	MediaProduct product = new VinylRecordProduct(type,title,price,year,genre);
-                	productList.add(product);
-                }
-                if(type == "Tape") {
-                	MediaProduct product = new TapeRecordProduct(type,title,price,year,genre);
-                	productList.add(product);
-                }
-		    }
-		    br.close();
-		    return true;
-		}catch (IOException e) {
-			System.out.println("Error occured");
-            e.printStackTrace();
-            return false;
-        }
-		catch(IllegalArgumentException e) {
-			System.out.println("Data is incompatible");
-			e.printStackTrace();
-			return false;
-		}
+	public StockManagerSingleton() {
+		productList = new ArrayList<>();
 	}
+	
+	public boolean initializeStock() {
+	try (BufferedReader br = new BufferedReader(new FileReader(inventoryFilePath))) {
+	    String line;
+	    @SuppressWarnings("unused")
+		String headerLine = br.readLine();
+	    while ((line = br.readLine()) != null) {
+	        String[] values = line.split(",");
+	        String type = values[0];
+	        String title = values[1];
+            double price = Double.parseDouble(values[2]);
+            int year = Integer.parseInt(values[3]);
+            Genre genre = Genre.valueOf(values[4]);
+            if("CD".equals(type)) {
+            	MediaProduct product = new CDRecordProduct(type,title,price,year,genre);
+            	productList.add(product);
+            }
+            else if("Vinyl".equals(type)) {
+            	MediaProduct product = new VinylRecordProduct(type,title,price,year,genre);
+            	productList.add(product);
+            }
+            else if("Tape".equals(type)) {
+            	MediaProduct product = new TapeRecordProduct(type,title,price,year,genre);
+            	productList.add(product);
+            }
+            else {
+            	System.out.println("Error");
+            }
+	    }
+	    br.close();
+	    return true;
+	}catch (IOException e) {
+		System.out.println("Error occured");
+        e.printStackTrace();
+        return false;
+    }
+	catch(IllegalArgumentException e) {
+		System.out.println("Data is incompatible");
+		e.printStackTrace();
+		return false;
+	}
+}
 	
 //	o Updates the price of the given media product to the newPrice.
 //	o Returns true if the update is successful, false otherwise
@@ -164,8 +171,11 @@ public class StockManagerSingleton {
 //			not leaking any informaHon.
 	
 	
-//			• public void printListOfMediaProduct(ArrayList<MediaProduct>
-//			productList):
+			public void printListOfMediaProduct(ArrayList<MediaProduct>productList) {
+				for(MediaProduct product: productList) {
+					MediaProduct.toString(product);
+				}
+			}
 //			o Prints the given media product list.
 	
 	
