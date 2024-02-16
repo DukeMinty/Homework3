@@ -173,7 +173,21 @@ public class StockManagerSingleton {
 //			o Gets the media products as an ArrayList.
 //			o This creates a new ArrayList of VinylRecordProduct that filters the vinyl records and
 //			returns the ArrayList. Beware of not leaking any informaHon.
-	
+	public ArrayList<VinylRecordProduct> getVinylRecordList(ArrayList<MediaProduct> productList){
+		ArrayList<VinylRecordProduct> vinylRecords = new ArrayList<VinylRecordProduct>();
+		
+		if (productList == null) {
+			return vinylRecords;
+		}
+		
+		for (MediaProduct product : productList) {
+			if (product.getType().equals("Vinyl")) {
+				vinylRecords.add((VinylRecordProduct)product);
+			}
+		}
+		
+		return vinylRecords;
+	}
 	
 //			• public ArrayList<CDRecordProduct>
 //			getCDRecordsList(ArrayList<MediaProduct> productList):
