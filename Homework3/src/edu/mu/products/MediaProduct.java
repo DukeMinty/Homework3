@@ -78,7 +78,7 @@ public class MediaProduct {
 			return false;
 		}
 		else {
-			System.out.println("Genre: " + mediaProduct.getGenre() +", Title: " + mediaProduct.getTitle() + ", Price: " + mediaProduct.getPrice()+ ", Year: " + mediaProduct.getYear());
+			System.out.println("Type: " + mediaProduct.getType() + ", Title: " + mediaProduct.getTitle() + ", Price: " + mediaProduct.getPrice()+ ", Year: " + mediaProduct.getYear() + ", Genre: " + mediaProduct.getGenre());
 			return true;
 		}
 	}
