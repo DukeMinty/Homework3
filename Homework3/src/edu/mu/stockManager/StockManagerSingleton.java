@@ -8,10 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import edu.mu.products.CDRecordProduct;
-import edu.mu.products.Genre;
-import edu.mu.products.MediaProduct;
-import edu.mu.products.VinylRecordProduct;
+import edu.mu.products.*;
 
 public class StockManagerSingleton {
 	
@@ -66,99 +63,99 @@ public class StockManagerSingleton {
 			return false;
 		}
 	}
-		public boolean updateItemPrice(MediaProduct product, double newPrice) {
-			if(product != null && product.getPrice() != newPrice) {
-				product.setPrice(newPrice);
-				return true;
-			}
+	
+//	o Updates the price of the given media product to the newPrice.
+//	o Returns true if the update is successful, false otherwise
+	public boolean updateItemPrice(MediaProduct product, double newPrice) {
+		if(product != null && product.getPrice() != newPrice) {
+			product.setPrice(newPrice);
+			return true;
+		}
+		return false;
+	}
+	
+
+//		o Adds a new media product to the inventory.
+//		o Returns true if the addiHon is successful, false otherwise.
+	public boolean addItem(MediaProduct product){
+		if (product == null) {
+			      // If product is null, do not add it to the inventory and return false.
+			      return false;
+			  }
+
+			  // Check if the product already exists in the inventory
+			  for (MediaProduct existingProduct : productList) {
+			      if (existingProduct.getTitle().equals(product.getTitle()) && existingProduct.getYear() == product.getYear()) {
+			          // Product already exists in the inventory, do not add.
+			          return false;
+			      }
+			  }
+			  // If product is new, add it to inventory
+			  productList.add(product);
+			  return true;
+	}
+	
+
+//		o Removes the given media product from the inventory.
+//		o Returns true if the removal is successful, false otherwise.	
+	public boolean removeItem(MediaProduct product) {
+		if (product == null) {
 			return false;
 		}
-//			o Updates the price of the given media product to the newPrice.
-//			o Returns true if the update is successful, false otherwise
-	
-	
-			public boolean addItem(MediaProduct product){
-				if (product == null) {
-			        // If product is null, do not add it to the inventory and return false.
-			        return false;
-			    }
+				
+		// Ensure that product is in productList
+		boolean productExists = false;
+		for (MediaProduct existingProduct : productList) {
+			if (existingProduct.equals(product)) {
+				productExists = true;
+				break;
+			}
+		}
+				
+		if (productExists) {
+			productList.remove(product);
+		}
+				
+		return productExists;
+	}
 
-			    // Check if the product already exists in the inventory
-			    for (MediaProduct existingProduct : productList) {
-			        if (existingProduct.getTitle().equals(product.getTitle()) && existingProduct.getYear() == product.getYear()) {
-			            // Product already exists in the inventory, do not add.
-			            return false;
-			        }
-			    }
-			    // If product is new, add it to inventory
-			    productList.add(product);
-			    return true;
-			}
-//			o Adds a new media product to the inventory.
-//			o Returns true if the addiHon is successful, false otherwise.
-	
-	
-			public boolean removeItem(MediaProduct product) {
-				if (product == null) {
-					return false;
-				}
-				
-				// Ensure that product is in productList
-				boolean productExists = false;
-				for (MediaProduct existingProduct : productList) {
-					if (existingProduct.equals(product)) {
-						productExists = true;
-						break;
-					}
-				}
-				
-				if (productExists) {
-					productList.remove(product);
-				}
-				
-				return productExists;
-			}
-//			o Removes the given media product from the inventory.
-//			o Returns true if the removal is successful, false otherwise.
-	
-	
-			public boolean saveStock() {
-				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter(inventoryFilePath));
-					
-					// truncates the file
-					bw.flush();
-					
-					String line1 = "Type,Title,Price,Year,Genre";
-					bw.write(line1, 0, line1.length());
-					
-					// Write each product to the file
-					String type = "";
-					String className;
-					for (MediaProduct product : productList) {
-						// Formats the genre to only have the first character capitalized
-						String genre = product.getGenre().name().toLowerCase();
-						String firstChar = String.valueOf(genre.charAt(0));
-						genre = genre.replaceFirst(firstChar, firstChar.toUpperCase());
-						
-						String line = String.format("%s,%s,%f,%d,%s", 
-													product.getType(), product.getTitle(), product.getPrice(), product.getYear(), genre);
-						bw.write(line, 0, line.length());
-						bw.newLine();
-					}
-				
-					bw.close();
-				}
-				catch (IOException e){
-					System.out.println(e);
-					return false;
-				}
-				
-				return true;
-			}
+		
 //			o Saves the updated inventory back to the CSV file located at inventoryFilePath.
 //			o Overwrites the exisHng file with the updated inventory data.
-//			o Returns true if the saving is successful, false otherwise (file does not exist, or file empty).
+//			o Returns true if the saving is successful, false otherwise (file does not exist, or file empty).	
+	public boolean saveStock() {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(inventoryFilePath));
+					
+			// truncates the file
+			bw.flush();
+					
+			String line1 = "Type,Title,Price,Year,Genre";
+			bw.write(line1, 0, line1.length());
+					
+			// Write each product to the file
+			for (MediaProduct product : productList) {
+				// Formats the genre to only have the first character capitalized
+				String genre = product.getGenre().name().toLowerCase();
+				String firstChar = String.valueOf(genre.charAt(0));
+				genre = genre.replaceFirst(firstChar, firstChar.toUpperCase());
+						
+				String line = String.format("%s,%s,%f,%d,%s", 
+											product.getType(), product.getTitle(), product.getPrice(), product.getYear(), genre);
+				bw.write(line, 0, line.length());
+				bw.newLine();
+			}
+				
+			bw.close();
+		}
+		catch (IOException e){
+			System.out.println(e);
+			return false;
+		}
+				
+		return true;
+	}
+
 	
 	
 //			• public ArrayList<MediaProduct> getMediaProductBelowPrice(int maxPrice):
