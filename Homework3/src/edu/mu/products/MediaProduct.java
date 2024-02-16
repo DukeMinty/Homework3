@@ -72,4 +72,14 @@ public class MediaProduct {
 			   other.getGenre() == genre && other.getTitle() == title &&
 			   this.getClass() == other.getClass();
 	}
+	
+	public boolean toString(MediaProduct mediaProduct) {
+		if(mediaProduct==null) {
+			return false;
+		}
+		else {
+			System.out.println("Genre: " + mediaProduct.getGenre() +", Title: " + mediaProduct.getTitle() + ", Price: " + mediaProduct.getPrice()+ ", Year: " + mediaProduct.getYear());
+			return true;
+		}
+	}
 }
