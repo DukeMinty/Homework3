@@ -53,4 +53,13 @@ public class MediaProduct {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		MediaProduct other = (MediaProduct)obj;
+		// Compares all attributes individually
+		return other.getPrice() == price && other.getYear() == year && 
+			   other.getGenre() == genre && other.getTitle() == title &&
+			   this.getClass() == other.getClass();
+	}
 }
