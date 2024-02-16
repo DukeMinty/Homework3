@@ -74,7 +74,26 @@ public class StockManagerSingleton {
 //			o Returns true if the addiHon is successful, false otherwise.
 	
 	
-//			• public boolean removeItem(MediaProduct product):
+			public boolean removeItem(MediaProduct product) {
+				if (product == null) {
+					return false;
+				}
+				
+				// Ensure that product is in productList
+				boolean productExists = false;
+				for (MediaProduct existingProduct : productList) {
+					if (existingProduct.equals(product)) {
+						productExists = true;
+						break;
+					}
+				}
+				
+				if (productExists) {
+					productList.remove(product);
+				}
+				
+				return productExists;
+			}
 //			o Removes the given media product from the inventory.
 //			o Returns true if the removal is successful, false otherwise.
 	
