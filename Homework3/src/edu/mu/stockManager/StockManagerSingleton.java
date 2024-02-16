@@ -25,8 +25,8 @@ public class StockManagerSingleton {
 		return instance;
 	}
 	
-	public StockManagerSingleton() {
-		productList = new ArrayList<>();
+	private StockManagerSingleton() {
+		productList = new ArrayList<MediaProduct>();
 	}
 	
 	public boolean initializeStock() {

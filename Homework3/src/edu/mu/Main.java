@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		StockManagerSingleton manager = new StockManagerSingleton();
+		StockManagerSingleton manager = StockManagerSingleton.getInstance();
 		manager.initializeStock();
 		manager.printListOfMediaProduct(manager.getproductList());
 		
