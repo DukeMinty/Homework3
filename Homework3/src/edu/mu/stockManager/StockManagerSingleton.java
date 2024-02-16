@@ -142,13 +142,13 @@ public class StockManagerSingleton {
 					
 			// Write each product to the file
 			for (MediaProduct product : productList) {
-				// Formats the genre to only have the first character capitalized
-				String genre = product.getGenre().name().toLowerCase();
-				String firstChar = String.valueOf(genre.charAt(0));
-				genre = genre.replaceFirst(firstChar, firstChar.toUpperCase());
-						
 				String line = String.format("%s,%s,%f,%d,%s", 
-											product.getType(), product.getTitle(), product.getPrice(), product.getYear(), genre);
+											product.getType(),
+											product.getTitle(),
+											product.getPrice(),
+											product.getYear(),
+											product.getGenre().name()
+											);
 				bw.write(line, 0, line.length());
 				bw.newLine();
 			}
