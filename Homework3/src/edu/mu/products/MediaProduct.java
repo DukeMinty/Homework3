@@ -7,6 +7,7 @@ public class MediaProduct {
 	protected double price;
 	protected int year;
 	protected Genre genre;
+	protected String type = "None";
 	
 	public MediaProduct(String title, double price, int year, Genre genre) {
 		this.title = title;
@@ -53,6 +54,14 @@ public class MediaProduct {
 
 	public void setGenre(Genre genre) {
 		this.genre = genre;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	@Override
