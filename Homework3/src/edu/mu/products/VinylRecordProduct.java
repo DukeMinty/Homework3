@@ -12,6 +12,15 @@ public class VinylRecordProduct extends MediaProduct{
 	//Inherited copy constructor
 	public VinylRecordProduct(VinylRecordProduct original) {
 		super(original);
+		this.type = original.getType();
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

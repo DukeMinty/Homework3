@@ -2,6 +2,7 @@ package edu.mu.products;
 
 public class MediaProduct {
 	
+
 	protected String title;
 	protected double price;
 	protected int year;

@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.mu.products.CDRecordProduct;
 import edu.mu.products.Genre;
 import edu.mu.products.MediaProduct;
+import edu.mu.products.VinylRecordProduct;
 
 public class StockManagerSingleton {
 	
@@ -32,12 +34,23 @@ public class StockManagerSingleton {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] values = line.split(",");
-		        String title = values[0];
-                double price = Double.parseDouble(values[1]);
-                int year = Integer.parseInt(values[2]);
-                Genre genre = Genre.valueOf(values[3]);
-		        MediaProduct product = new MediaProduct(title,price,year,genre);
-		        productList.add(product);
+		        String type = values[0];
+		        String title = values[1];
+                double price = Double.parseDouble(values[2]);
+                int year = Integer.parseInt(values[3]);
+                Genre genre = Genre.valueOf(values[4]);
+                if(type == "CD") {
+                	MediaProduct product = new CDRecordProduct(type,title,price,year,genre);
+                	productList.add(product);
+                }
+                if(type == "Vinyl") {
+                	MediaProduct product = new VinylRecordProduct(type,title,price,year,genre);
+                	productList.add(product);
+                }
+                if(type == "Tape") {
+                	MediaProduct product = new TapeRecordProduct(type,title,price,year,genre);
+                	productList.add(product);
+                }
 		    }
 		    br.close();
 		    return true;
