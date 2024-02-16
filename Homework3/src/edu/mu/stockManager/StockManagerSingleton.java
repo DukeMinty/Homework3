@@ -15,7 +15,17 @@ public class StockManagerSingleton {
 	
 	//Ask prof how to make list more protected
 	private ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
+	private static StockManagerSingleton instance = null;
 	
+	public static StockManagerSingleton getInstance() {
+		if (instance == null) {
+			instance = new StockManagerSingleton();
+		}
+		
+		return instance;
+	}
+	
+	private StockManagerSingleton() { }
 	
 	public boolean initializeStock(String filePath) {
 		try (BufferedReader br = new BufferedReader(new FileReader(inventoryFilePath))) {
