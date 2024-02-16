@@ -15,7 +15,6 @@ public class StockManagerSingleton {
 	
 	private final String inventoryFilePath = "files/inventory.csv";
 	
-	//Ask prof how to make list more protected
 	private ArrayList<MediaProduct> productList = new ArrayList<MediaProduct>();
 	private static StockManagerSingleton instance = null;
 	
