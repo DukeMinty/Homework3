@@ -171,9 +171,22 @@ public class StockManagerSingleton {
 //			not leaking any informaHon.
 	public ArrayList<MediaProduct> getMediaProductBelowPrice(int maxPrice){
 				ArrayList<MediaProduct> addProduct = new ArrayList<>();
+					String type;
+					MediaProduct clone = null;
 					for(MediaProduct mediaProduct: productList) {
 						if(mediaProduct.getPrice() < maxPrice) {
-							addProduct.add(mediaProduct);
+							type = mediaProduct.getType();
+							// Copy the media product to prevent information leaks
+							if (type.equals("CD")) {
+								clone = new CDRecordProduct((CDRecordProduct)mediaProduct);
+							}
+							else if (type.equals("Vinyl")) {
+								clone = new VinylRecordProduct((VinylRecordProduct)mediaProduct);
+							}
+							else if (type.equals("Tape")) {
+								clone = new TapeRecordProduct((TapeRecordProduct)mediaProduct);
+							}
+							addProduct.add(clone);
 							MediaProduct.toString(mediaProduct);
 						}
 					}
@@ -200,9 +213,11 @@ public class StockManagerSingleton {
 			return vinylRecords;
 		}
 		
+		VinylRecordProduct clone = null;
 		for (MediaProduct product : productList) {
 			if (product.getType().equals("Vinyl")) {
-				vinylRecords.add((VinylRecordProduct)product);
+				clone = new VinylRecordProduct((VinylRecordProduct)product);
+				vinylRecords.add((VinylRecordProduct)clone);
 			}
 		}
 		
@@ -218,9 +233,11 @@ public class StockManagerSingleton {
 			return CDRecords;
 		}
 		
+		CDRecordProduct clone = null;
 		for (MediaProduct product : productList) {
 			if (product.getType().equals("CD")) {
-				CDRecords.add((CDRecordProduct)product);
+				clone = new CDRecordProduct((CDRecordProduct)product);
+				CDRecords.add(clone);
 			}
 		}
 		
@@ -237,9 +254,11 @@ public class StockManagerSingleton {
 			return tapeRecords;
 		}
 		
+		TapeRecordProduct clone = null;
 		for (MediaProduct product : productList) {
 			if (product.getType().equals("Tape")) {
-				tapeRecords.add((TapeRecordProduct)product);
+				clone = new TapeRecordProduct((TapeRecordProduct)product);
+				tapeRecords.add(clone);
 			}
 		}
 		
@@ -247,7 +266,25 @@ public class StockManagerSingleton {
 	}
 	
 	public ArrayList<MediaProduct> getproductList() {
-		return productList;
+		ArrayList<MediaProduct> listClone = new ArrayList<MediaProduct>();
+		
+		MediaProduct productClone = null;
+		String type;
+		for (MediaProduct product : productList) {
+			type = product.getType();
+			if (type.equals("CD")) {
+				productClone = new CDRecordProduct((CDRecordProduct)product);
+			}
+			else if (type.equals("Vinyl")) {
+				productClone = new VinylRecordProduct((VinylRecordProduct)product);
+			}
+			else if (type.equals("Tape")) {
+				productClone = new TapeRecordProduct((TapeRecordProduct)product);
+			}
+			
+			listClone.add(productClone);
+		}
+		return listClone;
 	}
 
 	public String getInventoryFilePath() {
