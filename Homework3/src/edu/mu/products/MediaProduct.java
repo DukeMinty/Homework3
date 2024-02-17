@@ -73,13 +73,12 @@ public class MediaProduct {
 			   this.getClass() == other.getClass();
 	}
 	
-	public static boolean toString(MediaProduct mediaProduct) {
-		if(mediaProduct==null) {
-			return false;
-		}
-		else {
-			System.out.println("Type: " + mediaProduct.getType() + ", Title: " + mediaProduct.getTitle() + ", Price: " + mediaProduct.getPrice()+ ", Year: " + mediaProduct.getYear() + ", Genre: " + mediaProduct.getGenre());
-			return true;
-		}
+	@Override
+	public String toString() {
+		return "Type: " + getType() +
+				", Title: " + getTitle() + 
+				", Price: " + getPrice() + 
+				", Year: " + getYear() + 
+				", Genre: " + getGenre();
 	}
 }

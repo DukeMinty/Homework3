@@ -187,7 +187,6 @@ public class StockManagerSingleton {
 								clone = new TapeRecordProduct((TapeRecordProduct)mediaProduct);
 							}
 							addProduct.add(clone);
-							MediaProduct.toString(mediaProduct);
 						}
 					}
 					return addProduct;
@@ -196,7 +195,7 @@ public class StockManagerSingleton {
 	
 			public void printListOfMediaProduct(ArrayList<MediaProduct>productList) {
 				for(MediaProduct product: productList) {
-					MediaProduct.toString(product);
+					System.out.println(product.toString());
 				}
 			}
 //			o Prints the given media product list.
