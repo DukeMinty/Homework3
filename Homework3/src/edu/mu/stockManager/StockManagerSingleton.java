@@ -169,6 +169,16 @@ public class StockManagerSingleton {
 //			o Gets the media products that are below the given maxPrice.
 //			o This creates a new ArrayList of media products that is below the maxPrice. Beware of
 //			not leaking any informaHon.
+	public ArrayList<MediaProduct> getMediaProductBelowPrice(int maxPrice){
+				ArrayList<MediaProduct> addProduct = new ArrayList<>();
+					for(MediaProduct mediaProduct: productList) {
+						if(mediaProduct.getPrice() < maxPrice) {
+							addProduct.add(mediaProduct);
+							MediaProduct.toString(mediaProduct);
+						}
+					}
+					return addProduct;
+			}
 	
 	
 			public void printListOfMediaProduct(ArrayList<MediaProduct>productList) {
