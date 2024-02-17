@@ -209,12 +209,23 @@ public class StockManagerSingleton {
 		return vinylRecords;
 	}
 	
-//			• public ArrayList<CDRecordProduct>
-//			getCDRecordsList(ArrayList<MediaProduct> productList):
-//			o Gets the media products as an ArrayList.
 //			o This creates a new ArrayList of CDRecordProduct that filters the CD records and returns
 //			the ArrayList. Beware of not leaking any informaHon.
-	
+	public ArrayList<CDRecordProduct> getCDRecordList(ArrayList<MediaProduct> productList){
+		ArrayList<CDRecordProduct> CDRecords = new ArrayList<CDRecordProduct>();
+		
+		if (productList == null) {
+			return CDRecords;
+		}
+		
+		for (MediaProduct product : productList) {
+			if (product.getType().equals("CD")) {
+				CDRecords.add((CDRecordProduct)product);
+			}
+		}
+		
+		return CDRecords;
+	}
 	
 //			• public ArrayList<TapeRecordProduct>
 //			getTapeRecordList(ArrayList<MediaProduct> productList):
